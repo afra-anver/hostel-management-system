@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About - Hostel Management System</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #14185a;
+      --primary-dark: #3b40a0;
+      --accent: #8f94fb;
+      --footer-bg: #1a1a2e;
+    }
+    body { background-color: #f5f6fa; }
+    .navbar { background: var(--primary) !important; }
+    .navbar-brand, .nav-link { color: #fff !important; font-weight: 500; }
+    .nav-link:hover, .nav-link.active { color: #ffd369 !important; }
+
+    .about-card {
+      border: none;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(78,84,200,0.15);
+      border-top: 5px solid var(--primary);
+    }
+    .about-card h2 { font-weight: 700; color: var(--primary); }
+
+    footer {
+      background: var(--footer-bg);
+      color: #cfd2e6;
+      padding: 50px 0 20px;
+      margin-top: 70px;
+    }
+    footer h5 { color: #fff; font-weight: 600; margin-bottom: 16px; }
+    footer a { color: #cfd2e6; text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: var(--accent); }
+    footer .footer-bottom {
+      border-top: 1px solid #2e2e4d;
+      margin-top: 30px;
+      padding-top: 16px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #9a9cb8;
+    }
+    footer ul { padding-left: 0; list-style: none; }
+    footer ul li { margin-bottom: 8px; }
+    footer .social-icons a {
+      display: inline-flex;
+      width: 36px; height: 36px;
+      background: #2e2e4d;
+      border-radius: 50%;
+      align-items: center; justify-content: center;
+      margin-right: 8px;
+      color: #fff;
+    }
+    footer .social-icons a:hover { background: var(--primary); }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg shadow-sm">
+    <div class="container">
+      <a class="navbar-brand" href="index.html"><i class="bi bi-building"></i> Hostel Management System</a>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="form.html">Form</a></li>
+          <li class="nav-item"><a class="nav-link active" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- About -->
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="card about-card p-4">
+          <h2 class="mb-3 text-center"><i class="bi bi-info-circle"></i> About Us</h2>
+          <p class="text-muted">
+                    Our Hostel Management System is a user-friendly
+                    website designed to make hostel management easier,
+                    faster, and more efficient. It provides a simple
+                    platform for student registration, room allocation,
+                    fee management, and student information.
+                </p>
+
+                <p class="text-muted">
+                    The system helps hostel administrators manage daily
+                    activities efficiently while allowing students to
+                    access important hostel-related information easily.
+                    It reduces paperwork, saves time, and improves
+                    communication.
+                </p>
+
+                <p class="text-muted mb-0">
+                    We aim to create a secure, reliable, and well-organized
+                    hostel environment through modern technology.
+                    Our goal is to make hostel administration smarter,
+                    simpler, and more convenient.
+                </p>        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-md-4">
+          <h5><i class="bi bi-building"></i> Hostel Management System</h5>
+          <p>A web application to manage hostel rooms, student details and complaints efficiently.</p>
+        </div>
+        <div class="col-md-4">
+          <h5>Quick Links</h5>
+          <ul>
+            <li><a href="index.html"><i class="bi bi-chevron-right"></i> Home</a></li>
+            <li><a href="form.html"><i class="bi bi-chevron-right"></i> Add Student</a></li>
+            <li><a href="about.html"><i class="bi bi-chevron-right"></i> About Us</a></li>
+            <li><a href="contact.html"><i class="bi bi-chevron-right"></i> Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h5>Contact Us</h5>
+          <p><i class="bi bi-geo-alt-fill"></i> 123 Hostel Street, Chennai, Tamil Nadu</p>
+          <p><i class="bi bi-telephone-fill"></i> +91 98765 43210</p>
+          <p><i class="bi bi-envelope-fill"></i> info@hostelms.com</p>
+          <div class="social-icons mt-3">
+            <a href="#"><i class="bi bi-facebook"></i></a>
+            <a href="#"><i class="bi bi-instagram"></i></a>
+            <a href="#"><i class="bi bi-linkedin"></i></a>
+            <a href="#"><i class="bi bi-github"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        © 2025 Hostel Management System | Developed by <strong>Afra Anver</strong>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
