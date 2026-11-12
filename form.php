@@ -23,20 +23,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Phone must be 10 digits!");
     }
 
-    // 4. Duplicate email check (optional)
-    $sql_check = "SELECT * FROM entries WHERE email = '$email'";
-    $result = $conn->query($sql_check);
-    if ($result->num_rows > 0) {
+    // 4. Duplicate Email check
+    $sql_check_email = "SELECT * FROM entries WHERE email = '$email'";
+    $result_email = $conn->query($sql_check_email);
+    if ($result_email->num_rows > 0) {
         die("Email already exists!");
     }
 
-    // 5. Insert data
+    
+    $sql_check_phone = "SELECT * FROM entries WHERE phone = '$phone'";
+    $result_phone = $conn->query($sql_check_phone);
+    if ($result_phone->num_rows > 0) {
+        die("Phone number already exists!");
+    }
+
+    // 6. Insert data
     $sql = "INSERT INTO entries (name, email, phone, room)
             VALUES ('$name', '$email', '$phone', '$room')";
 
     if ($conn->query($sql) === TRUE) {
-        echo "<h2 style='color:green;text-align:center;margin-top:50px;'>Entry added successfully!</h2>";
-        echo "<p style='text-align:center;'><a href='form.html'>← Add another entry</a></p>";
+        
+        echo "<div style='max-width:500px;margin:50px auto;padding:20px;background:#d1e7dd;color:#0f5132;border-radius:8px;text-align:center;font-family:sans-serif;'>
+                <h3>✅ Entry added successfully!</h3>
+                <p><a href='view.php' style='color:#4e54c8; font-weight:bold;'>View All Records</a> | <a href='form.html' style='color:#4e54c8;'>Add another</a></p>
+              </div>";
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }

@@ -53,10 +53,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
   <style>
     :root {
-      --primary: #4e54c8;
+      --primary: #14185a;
       --primary-dark: #3b40a0;
       --accent: #8f94fb;
-      --footer-bg: #1a1a2e;
+      --footer-bg: #0f0e41;
     }
     body { background-color: #f5f6fa; }
     .navbar { background: var(--primary) !important; }
@@ -188,8 +188,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
         <div class="col-md-4">
           <h5>Contact Us</h5>
-          <p><i class="bi bi-geo-alt-fill"></i> 123 Hostel Street, Chennai, Tamil Nadu</p>
-          <p><i class="bi bi-telephone-fill"></i> +91 98765 43210</p>
+          <p><i class="bi bi-geo-alt-fill"></i> No. 25, Peradeniya Road, Kandy, Sri Lanka</p>
+          <p><i class="bi bi-telephone-fill"></i> +94 74 1234567</p>
           <p><i class="bi bi-envelope-fill"></i> info@hostelms.com</p>
           <div class="social-icons mt-3">
             <a href="#"><i class="bi bi-facebook"></i></a>
@@ -200,7 +200,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
       </div>
       <div class="footer-bottom">
-        © 2025 Hostel Management System | Developed by <strong>[Your Name]</strong>
+        © 2025 Hostel Management System | Developed by <strong>Afra Anver</strong>
       </div>
     </div>
   </footer>
