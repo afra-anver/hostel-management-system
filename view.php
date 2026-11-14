@@ -37,7 +37,7 @@ $result = $conn->query($sql);
     :root {
       --primary: #14185a;
       --primary-dark: #3b40a0;
-      --accent: #3b3e7b;
+      --accent: #8f94fb;
       --footer-bg: #0f0e41;
     }
     body { background-color: #f5f6fa; }
@@ -48,7 +48,7 @@ $result = $conn->query($sql);
     .card-custom {
       border: none;
       border-radius: 16px;
-      box-shadow: 0 10px 30px rgba(116, 122, 238, 0.1);
+      box-shadow: 0 10px 30px rgba(78,84,200,0.1);
     }
     .table thead {
       background-color: var(--primary);
@@ -58,7 +58,7 @@ $result = $conn->query($sql);
       background-color: rgba(78,84,200,0.05);
     }
 
-    
+
     footer {
       background: var(--footer-bg);
       color: #cfd2e6;
@@ -88,6 +88,27 @@ $result = $conn->query($sql);
       color: #fff;
     }
     footer .social-icons a:hover { background: var(--primary); }
+
+
+
+
+    .btn-primary {
+      background-color: var(--primary) !important;
+      border-color: var(--primary) !important;
+      color: #fff;
+    }
+    .btn-primary:hover {
+      background-color: var(--primary-dark) !important;
+      border-color: var(--primary-dark) !important;
+    }
+    .text-primary {
+      color: var(--primary) !important;
+    }
+    .form-control:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 0.25rem rgba(78, 84, 200, 0.25);
+    }
+
   </style>
 </head>
 <body>
@@ -102,8 +123,7 @@ $result = $conn->query($sql);
       <div class="collapse navbar-collapse" id="navMenu">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="form.html">Form</a></li>
-          <li class="nav-item"><a class="nav-link active" href="view.php">View Records</a></li>
+          <li class="nav-item"><a class="nav-link active" href="view.php">Records</a></li>
           <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
           <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
         </ul>
@@ -143,10 +163,11 @@ $result = $conn->query($sql);
               <th>Phone</th>
               <th>Room No</th>
               <th>Created At</th>
+               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            <?php
+                        <?php
             if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
                     echo "<tr>
@@ -156,13 +177,18 @@ $result = $conn->query($sql);
                         <td>{$row['phone']}</td>
                         <td><span class='badge bg-info text-dark'>{$row['room']}</span></td>
                         <td>" . date('d M Y, h:i A', strtotime($row['created_at'])) . "</td>
+                        <td class='text-nowrap'>
+                            <a href='update.php?id={$row['id']}' class='btn btn-sm btn-primary'><i class='bi bi-pencil'></i> Edit</a>
+                            <a href='delete.php?id={$row['id']}' class='btn btn-sm btn-danger' onclick=\"return confirm('Are you sure you want to delete this record?');\"><i class='bi bi-trash'></i> Delete</a>
+                        </td>
                     </tr>";
                 }
             } else {
-                echo "<tr><td colspan='6' class='text-center text-muted py-4'>No entries found</td></tr>";
+                
+                echo "<tr><td colspan='7' class='text-center text-muted py-4'>No entries found</td></tr>";
             }
             ?>
-          </tbody>
+         </tbody>  
         </table>
       </div>
 
@@ -207,12 +233,12 @@ $result = $conn->query($sql);
             <li><a href="form.html"><i class="bi bi-chevron-right"></i> Add Student</a></li>
             <li><a href="view.php"><i class="bi bi-chevron-right"></i> View Records</a></li>
             <li><a href="about.html"><i class="bi bi-chevron-right"></i> About Us</a></li>
-            <li><a href="contact.php"><i class="bi bi-chevron-right"></i> Contact Us</a></li>
+            <li><a href="contact.html"><i class="bi bi-chevron-right"></i> Contact Us</a></li>
           </ul>
         </div>
         <div class="col-md-4">
           <h5>Contact Us</h5>
-          <p><i class="bi bi-geo-alt-fill"></i> No. 25, Peradeniya Road, Kandy, Sri Lanka</p>
+          <p><i class="bi bi-geo-alt-fill"></i>No. 25, Peradeniya Road, Kandy, Sri Lanka </p>
           <p><i class="bi bi-telephone-fill"></i> +94 74 1234567</p>
           <p><i class="bi bi-envelope-fill"></i> info@hostelms.com</p>
           <div class="social-icons mt-3">
