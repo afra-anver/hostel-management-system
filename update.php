@@ -32,7 +32,7 @@ if(isset($_POST['update'])) {
         // Update Query
         $sql = "UPDATE entries SET name='$name', email='$email', phone='$phone', room='$room' WHERE id=$id";
         if($conn->query($sql) === TRUE){
-            header("Location: view.php");
+            header("Location: view.php?msg=updated");
             exit();
         } else {
             $error = "Error updating record: " . $conn->error;
@@ -50,7 +50,7 @@ if(isset($_POST['update'])) {
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
   <style>
-    :root { --primary: #4e54c8; }
+    :root { --primary: #14185a; }
     body { background-color: #f5f6fa; }
     .navbar { background: var(--primary) !important; }
     .navbar-brand, .nav-link { color: #fff !important; font-weight: 500; }

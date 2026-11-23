@@ -133,7 +133,22 @@ $result = $conn->query($sql);
 
   <!-- Main Content -->
   <div class="container mt-5">
-    
+  
+    <?php if(isset($_GET['msg'])): ?>
+      <?php if($_GET['msg'] == 'updated'): ?>
+        <div class="alert alert-success alert-dismissible fade show shadow-sm" role="alert">
+          <i class="bi bi-check-circle-fill"></i> Record <strong>Updated Successfully!</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      <?php elseif($_GET['msg'] == 'deleted'): ?>
+        <div class="alert alert-danger alert-dismissible fade show shadow-sm" role="alert">
+          <i class="bi bi-trash-fill"></i> Record <strong>Deleted Successfully!</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      <?php endif; ?>
+    <?php endif; ?>
+    <!-- Alert End -->
+
     <div class="d-flex justify-content-between align-items-center mb-4">
       <h2><i class="bi bi-table text-primary"></i> Student Records</h2>
       <a href="form.html" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Add New Entry</a>
@@ -154,8 +169,8 @@ $result = $conn->query($sql);
     <!-- Data Table -->
     <div class="card card-custom p-3">
       <div class="table-responsive">
-        <table class="table table-bordered table-hover align-middle mb-0">
-          <thead>
+        <table class="table table-bordered table-hover align-middle mb-0" id="entriesTable">
+          <!--<thead>
             <tr>
               <th>ID</th>
               <th>Name</th>
@@ -165,7 +180,21 @@ $result = $conn->query($sql);
               <th>Created At</th>
                <th>Action</th>
             </tr>
-          </thead>
+          </thead>-->
+
+          <thead>
+  <tr>
+    <th onclick="sortTable(0)" style="cursor:pointer;">ID <i class="bi bi-arrow-down-up"></i></th>
+    <th onclick="sortTable(1)" style="cursor:pointer;">Name <i class="bi bi-arrow-down-up"></i></th>
+    <th onclick="sortTable(2)" style="cursor:pointer;">Email <i class="bi bi-arrow-down-up"></i></th>
+    <th onclick="sortTable(3)" style="cursor:pointer;">Phone <i class="bi bi-arrow-down-up"></i></th>
+    <th onclick="sortTable(4)" style="cursor:pointer;">Room No <i class="bi bi-arrow-down-up"></i></th>
+    <th>Created At</th>
+    <th>Action</th>
+  </tr>
+</thead>
+
+
           <tbody>
                         <?php
             if ($result->num_rows > 0) {
@@ -178,10 +207,15 @@ $result = $conn->query($sql);
                         <td><span class='badge bg-info text-dark'>{$row['room']}</span></td>
                         <td>" . date('d M Y, h:i A', strtotime($row['created_at'])) . "</td>
                         <td class='text-nowrap'>
-                            <a href='update.php?id={$row['id']}' class='btn btn-sm btn-primary'><i class='bi bi-pencil'></i> Edit</a>
-                            <a href='delete.php?id={$row['id']}' class='btn btn-sm btn-danger' onclick=\"return confirm('Are you sure you want to delete this record?');\"><i class='bi bi-trash'></i> Delete</a>
-                        </td>
-                    </tr>";
+                    <a href='update.php?id={$row['id']}' class='btn btn-sm btn-primary'><i class='bi bi-pencil'></i> Edit</a>
+                
+                <!-- Puthu Delete Button (Modal open panna) -->
+                <button type='button' class='btn btn-sm btn-danger' onclick='confirmDelete({$row['id']})'>
+                    <i class='bi bi-trash'></i> Delete
+                </button>
+              </td>
+            </tr>";
+                  
                 }
             } else {
                 
@@ -218,7 +252,7 @@ $result = $conn->query($sql);
     </div>
   </div>
 
-  <!-- Footer (Day 1 & Day 2 Same Footer) -->
+
   <footer>
     <div class="container">
       <div class="row g-4">
@@ -256,5 +290,77 @@ $result = $conn->query($sql);
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Delete Confirmation Modal -->
+  <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #14185a; color: white;">
+          <h5 class="modal-title"><i class="bi bi-exclamation-triangle"></i> Confirm Delete</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center fs-5">
+          Are you sure you want to delete this entry? <br> This action cannot be undone.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <!-- Ithu than actual delete link -->
+          <a href="#" id="modalDeleteBtn" class="btn btn-danger">Yes, Delete</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table Sorting JS & Modal JS -->
+  <script>
+    // 1. Sorting Function
+    function sortTable(n) {
+      var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+      table = document.getElementById("entriesTable");
+      switching = true;
+      dir = "asc"; 
+      
+      while (switching) {
+        switching = false;
+        rows = table.rows;
+        for (i = 1; i < (rows.length - 1); i++) {
+          shouldSwitch = false;
+          x = rows[i].getElementsByTagName("TD")[n];
+          y = rows[i + 1].getElementsByTagName("TD")[n];
+          
+          if (dir == "asc") {
+            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+              shouldSwitch = true;
+              break;
+            }
+          } else if (dir == "desc") {
+            if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+              shouldSwitch = true;
+              break;
+            }
+          }
+        }
+        if (shouldSwitch) {
+          rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+          switching = true;
+          switchcount ++;      
+        } else {
+          if (switchcount == 0 && dir == "asc") {
+            dir = "desc";
+            switching = true;
+          }
+        }
+      }
+    }
+
+    // 2. Modal Delete Function
+    function confirmDelete(id) {
+        // Dynamic-ah delete.php link-ah modal button-ku set panrom
+        document.getElementById('modalDeleteBtn').href = 'delete.php?id=' + id;
+        // Modal-ah open panrom
+        var myModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+        myModal.show();
+    }
+  </script>
+
 </body>
 </html>
